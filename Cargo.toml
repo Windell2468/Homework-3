@@ -1,0 +1,16 @@
+[package]
+name = "Assignment-3"
+version = "0.1.0"
+edition = "2021"
+
+# This section specifies the binary program.
+#[[bin]]
+#name = "Assignment-3"
+#path = "src/main.rs"  # The path to your main.rs file
+
+# Optional: If you want a library, specify the library name and path.
+# If you don't want a library, you can remove this section.
+#[lib]
+#name = "libproj2"
+#path = "src/lib.rs"
+[dependencies]
