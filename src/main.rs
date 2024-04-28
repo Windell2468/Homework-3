@@ -15,35 +15,35 @@ macro_rules! print_linked_list {
 fn main() {
     let mut list = LinkedList::new();
 
+    list.insert(5);
     list.insert(10);
+    list.insert(15);
     list.insert(20);
-    list.insert(30);
-    list.insert(40);
 
     println!("Initial list:");
-    print_linked_list!(list); // Output: 40 -> 30 -> 20 -> 10 -> None
+    print_linked_list!(list); // Output: 20 -> 15 -> 10 -> 5-> None
 
-    list.insert_at_tail(50);
+    list.insert_at_tail(25);
 
     println!("List after inserting at tail:");
-    print_linked_list!(list); // Output: 40 -> 30 -> 20 -> 10 -> 50 -> None
+    print_linked_list!(list); // Output: 20 -> 15 -> 10 -> 5 -> 25 -> None
 
-    list.insert_at_index(25, 2);
+    list.insert_at_index(30, 2);
 
     println!("List after inserting at index 2:");
-    print_linked_list!(list); // Output: 40 -> 30 -> 25 -> 20 -> 10 -> 50 -> None
+    print_linked_list!(list); // Output: 20 -> 15 -> 30 -> 10 -> 5 -> 25 -> None
 
     list.delete_at_index(3);
 
     println!("List after deleting at index 3:");
-    print_linked_list!(list); // Output: 40 -> 30 -> 25 -> 10 -> 50 -> None
+    print_linked_list!(list); // Output: 20 -> 15 -> 25 -> 10 -> 5 -> None
 
     list.update(2, 35);
 
     println!("List after updating at index 2:");
-    print_linked_list!(list); // Output: 40 -> 30 -> 35 -> 10 -> 50 -> None
+    print_linked_list!(list); // Output: 20 -> 15 -> 35 -> 5 -> 25 -> None
 
-    println!("Element at index 3: {:?}", list.get(3)); // Output: Some(10)
+    println!("Element at index 3: {:?}", list.get(3)); // Output: Some(5)
 }
 
 use std::fmt;
@@ -61,7 +61,7 @@ impl<J> Node<J> {
     }
 }
 
-/// Define a LinkedList struct
+/// Define a structure for a linked list.
 pub struct LinkedList<J> {
     head: Option<Box<Node<J>>>,
     size: usize,
@@ -73,16 +73,16 @@ impl<J> LinkedList<J> {
         LinkedList { head: None, size: 0 }
     }
 
-    /// Insert data at the beginning of the list
-    pub fn insert(&mut self, data: J) {
+     /// Insert data at the start of the list.
+        pub fn insert(&mut self, data: J) {
         let mut new_node = Box::new(Node::new(data));
         new_node.next = self.head.take();
         self.head = Some(new_node);
         self.size += 1;
     }
 
-    /// Insert data at the end of the list
-    pub fn insert_at_tail(&mut self, data: J) {
+     /// Insert data at the tail of the list.
+        pub fn insert_at_tail(&mut self, data: J) {
         let mut current = &mut self.head;
         while let Some(ref mut node) = current {
             current = &mut node.next;
@@ -91,7 +91,8 @@ impl<J> LinkedList<J> {
         self.size += 1;
     }
 
-    /// Insert data at a specific index
+    /// Insert data at a particular index within the list.
+
     pub fn insert_at_index(&mut self, data: J, index: usize) {
         if index > self.size {
             panic!("Index out of bounds");
@@ -110,7 +111,7 @@ impl<J> LinkedList<J> {
         self.size += 1;
     }
 
-    /// Delete node at a specific index
+    /// Need to delete node at a specific index
     pub fn delete_at_index(&mut self, index: usize) {
         if index >= self.size {
             panic!("Index out of bounds");
@@ -135,7 +136,7 @@ impl<J> LinkedList<J> {
         current.as_mut().unwrap().data = data;
     }
 
-    /// Get data at a specific index
+    /// Retrieve the data at a specific index.
     pub fn get(&self, index: usize) -> Option<&J> {
         if index >= self.size {
             return None;
